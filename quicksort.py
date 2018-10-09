@@ -1,11 +1,11 @@
 import sys
 from timeit import default_timer as timer
-
+import time
 #Have to set higher recursion limit for pyhton than default
-sys.setrecursionlimit(100000)
+sys.setrecursionlimit(10000000)
 #list all the files that are being sorted
 print ('sys.argv is', sys.argv)
-
+call = 0
 #function that recieves file path and opens
 #then reads in all the lines into a list
 #returns the list
@@ -20,15 +20,19 @@ def readFile(fileName):
 #Quick Sort Function
 
 def quickSort(list, p, r):
+	global call
+	print(call)
+#	time.sleep(.01)
 	if (p < r):
 		middle = partition(list, p, r)
 		quickSort(list, p, (middle - 1))
 		quickSort(list, (middle + 1), r)
+	call = call + 1
 
 def partition(list, start, end):
 	last = list[end]
 	i = start - 1
-	for j in range (end - 1, start, 1):
+	for j in range(end - 1, start, 1):
 		if list[j] <= last:
 			i = i + 1
 			list[i]. list[j] = list[j], list[i]
@@ -40,9 +44,12 @@ def partition(list, start, end):
 #must skip the first element in sys.argv, because it is the path of the file being executed
 #returns nothing
 #calls readFile and selectionSort functions
+
 for item in sys.argv[1:]:
 	list = readFile(item)
-	start = 0
+	begin = 0
 	n = len(list)
-	quickSort(list, start, n - 1)
-	#print(list)
+	start = timer()
+	quickSort(list, begin, n - 1)
+	end = timer()
+	print(str(n) + ', ' + 'comparisons' + ', ' + str((end-start)))
