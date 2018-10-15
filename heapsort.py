@@ -17,7 +17,7 @@ def readFile(fileName):
 
 #HeapSort Function
 def heapSort(list):
-	n = len(list)
+	n = len(list) - 1
 	buildMaxHeap(list)
 	for i in range(n, 2, -1):
 		list[1], list[i] = list[i], list[1]
@@ -32,15 +32,15 @@ def buildMaxHeap(list):
 		maxHeapify(list, i)
 
 def maxHeapify(list, i):
-	n = len(list)
+	n = len(list) - 1
 	left = 2 * i
 	right = (2 * i) + 1
 	if (left <= n) and (list[left] > list [i]):
 		largest = left
 	else :
 		largest = i
-	if (right <= n) and (list[r] > list[largest]):
-		largest = r
+	if (right <= n) and (list[right] > list[largest]):
+		largest = right
 	if largest is not i:
 		list[i], list[largest] = list[largest], list[i]
 		maxHeapify(list, largest)
@@ -52,5 +52,8 @@ def maxHeapify(list, i):
 #calls readFile and selectionSort functions
 for item in sys.argv[1:]:
 	list = readFile(item)
+	n = len(list)
+	start = timer()
 	heapSort(list)
-	#print(list)
+	end = timer()
+	print (str(n) + ', ' + 'comparisons' + ', ' + str(end-start))

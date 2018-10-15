@@ -21,7 +21,7 @@ def readFile(fileName):
 
 def quickSort(list, p, r):
 	global call
-	print(call)
+#	print(call)
 #	time.sleep(.01)
 	if (p < r):
 		middle = partition(list, p, r)
@@ -32,10 +32,10 @@ def quickSort(list, p, r):
 def partition(list, start, end):
 	last = list[end]
 	i = start - 1
-	for j in range(end - 1, start, 1):
+	for j in range(start, end - 1):
 		if list[j] <= last:
 			i = i + 1
-			list[i]. list[j] = list[j], list[i]
+			list[i], list[j] = list[j], list[i]
 	list[i + 1], list[end] = list[end], list[i + 1]
 	return (i + 1)
 
@@ -53,3 +53,8 @@ for item in sys.argv[1:]:
 	quickSort(list, begin, n - 1)
 	end = timer()
 	print(str(n) + ', ' + 'comparisons' + ', ' + str((end-start)))
+
+	list2 = list
+	list2.sort()
+	if list == list2:
+		print('Sorted!')
