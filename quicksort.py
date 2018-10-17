@@ -30,12 +30,14 @@ def quickSort(list, p, r):
 	call = call + 1
 
 def partition(list, start, end):
+	global call
 	last = list[end]
 	i = start - 1
 	for j in range(start, end - 1):
 		if list[j] <= last:
 			i = i + 1
 			list[i], list[j] = list[j], list[i]
+		call = call + 1
 	list[i + 1], list[end] = list[end], list[i + 1]
 	return (i + 1)
 
@@ -52,9 +54,5 @@ for item in sys.argv[1:]:
 	start = timer()
 	quickSort(list, begin, n - 1)
 	end = timer()
-	print(str(n) + ', ' + 'comparisons' + ', ' + str((end-start)))
+	print(str(n) + ', ' + str(call) + ', ' + str((end-start)))
 
-	list2 = list
-	list2.sort()
-	if list == list2:
-		print('Sorted!')

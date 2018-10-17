@@ -4,6 +4,9 @@ from timeit import default_timer as timer
 #list all the files that are being sorted
 print ('sys.argv is', sys.argv)
 
+
+call = 0
+
 #function that recieves file path and opens
 #then reads in all the lines into a list
 #returns the list
@@ -32,6 +35,7 @@ def buildMaxHeap(list):
 		maxHeapify(list, i)
 
 def maxHeapify(list, i):
+	global call
 	n = len(list) - 1
 	left = 2 * i
 	right = (2 * i) + 1
@@ -39,12 +43,14 @@ def maxHeapify(list, i):
 		largest = left
 	else :
 		largest = i
+	call = call + 2
 	if (right <= n) and (list[right] > list[largest]):
 		largest = right
+	call = call + 2
 	if largest is not i:
 		list[i], list[largest] = list[largest], list[i]
 		maxHeapify(list, largest)
-
+	call = call + 1
 
 #loop through the number of file arguments, open and then sort them
 #must skip the first element in sys.argv, because it is the path of the file being executed
@@ -56,4 +62,4 @@ for item in sys.argv[1:]:
 	start = timer()
 	heapSort(list)
 	end = timer()
-	print (str(n) + ', ' + 'comparisons' + ', ' + str(end-start))
+	print (str(n) + ', ' + str(call) + ', ' + str(end-start))
