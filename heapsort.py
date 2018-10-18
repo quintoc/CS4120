@@ -4,7 +4,7 @@ from timeit import default_timer as timer
 #list all the files that are being sorted
 print ('sys.argv is', sys.argv)
 
-
+#set number of comparisons variable
 call = 0
 
 #function that recieves file path and opens
@@ -19,6 +19,9 @@ def readFile(fileName):
 	return list
 
 #HeapSort Function
+#takes the list as parameters
+#Takes the list and is the initial call to sort the list
+#returns a sorted list
 def heapSort(list):
 	n = len(list) - 1
 	buildMaxHeap(list)
@@ -27,13 +30,18 @@ def heapSort(list):
 		n = n - 1
 		maxHeapify(list, 1)
 
-
-
+#build Max Heapify Function
+#takes the list as a parameter
+#builds the heap in a max heap
 def buildMaxHeap(list):
 	n = len(list)
 	for i in range((n // 2), 1, -1):
 		maxHeapify(list, i)
 
+#Max Heapify Function
+#takes the list and index as parameters
+#recursively calls itself to swap values into the right place
+#returns a sorted list from the index
 def maxHeapify(list, i):
 	global call
 	n = len(list) - 1
@@ -59,7 +67,9 @@ def maxHeapify(list, i):
 for item in sys.argv[1:]:
 	list = readFile(item)
 	n = len(list)
+
 	start = timer()
 	heapSort(list)
 	end = timer()
+	#output raw info: size, comparisons, and time
 	print (str(n) + ', ' + str(call) + ', ' + str(end-start))

@@ -1,3 +1,4 @@
+#import important libraries
 import sys
 from timeit import default_timer as timer
 
@@ -33,7 +34,6 @@ def selectionSort(list):
 		list[j], list[smallest] = list[smallest], list[j]
 	end = timer()
 	time = end-start
-	#output results
 	print(str(n) + ', ' + str(comparisons) + ', ' + str(time))
 
 #loop through the number of file arguments, open and then sort them
@@ -43,4 +43,3 @@ def selectionSort(list):
 for item in sys.argv[1:]:
 	list = readFile(item)
 	selectionSort(list)
-	#print(list)
